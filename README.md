@@ -1,27 +1,42 @@
 # NgSwipe
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
+Angular Library for galleries.
 
-## Development server
+## Install
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm i @ng-swipe/core` to install the package. 
 
-## Code scaffolding
+## How to
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+ -After installing the library import it in the module you desire `import { CoreModule } from "@ng-swipe/core"`.
+ - use the component `<ng-swipe-core [images]="data" id="2" dir="ltr"></ng-swipe-core>` and provide the images @Input.
+ - the slider have default configuration but you can provide your own option by using one of two methods :
+  - provide global config at Module level `CoreModule.forRoot(config: SliderConfig)`.
+  - provide component level config ` <ng-swipe-core [images]="data" [config]="config" id="1" dir="ltr"></ng-swipe-core>`.
+ 
+##  Options model
+  
+    effect?: "swipe" | "fade" ;
+    autoPlay?: autoPlay ;
+    sliderHeight?: number;
+    initialItem?: number;
+    itemsPerView?: number;
+    navigate?: boolean;
+    leftIcon?: string;
+    rightIcon?: string;
+    paginate?: boolean;
+    thumbs?: boolean;
+    thumbsHeight?: number;
+    thumbsPerView?: number;
+    thumbsMove?: "item" | "group";
+    itemSpaceX?: number;
+    itemSpaceY?: number;
+    bgColor?: string;
+    accentColor?: string;
+    breakpoints?: BreakPoints;
+    
+ ## Breakpoints keys
+   "XSmall": SliderConfig | "Small"": SliderConfig | "Medium"": SliderConfig | "Large"": SliderConfig
+   | "XLarge"": SliderConfig | "Handset"": SliderConfig | "Tablet"": SliderConfig | "HandsetPortrait"": SliderConfig 
+   | "TabletPortrait"": SliderConfig | "HandsetLandscape"": SliderConfig | "TabletLandscape": SliderConfig"
+   
