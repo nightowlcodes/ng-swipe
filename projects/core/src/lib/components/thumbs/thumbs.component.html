@@ -1,0 +1,21 @@
+<div class="container">
+  <div
+    class="thumbnails"
+    [style.paddingLeft.px]="config.itemSpaceX"
+    [style.paddingRight.px]="config.itemSpaceX"
+    #thumbsContainer>
+    <div
+      class="swipe-item"
+      *ngFor="let img of state.items; let i = index"
+      [style.backgroundImage]="'url(' + img.source + ')'"
+      (tap)="event.emit(i)"
+      [ngClass]="{ active: state.activeIndex === i }"
+      [style.minWidth.px]="thumbWidth"
+      [style.height.px]="config.thumbsHeight"
+      [style.marginTop.px]="config.itemSpaceY"
+      [style.marginBottom.px]="config.itemSpaceY"
+      [style.marginLeft.px]=" state.direction === 'rtl' ? config.itemSpaceX : null"
+      [style.marginRight.px]="state.direction === 'ltr' ? config.itemSpaceX : null">
+    </div>
+  </div>
+</div>

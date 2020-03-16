@@ -1,0 +1,19 @@
+<span class="navigation" [ngClass]="{'rtl': state.direction === 'rtl'}">
+  <button
+    type="button"
+    class="prev"
+    (click)="event.emit('prev')"
+    [innerHtml]="prev"
+    [disabled]="!state.hasPrev ? 'disabled' : null"
+    [style.background]="config.bgColor"
+  ></button>
+  <button
+    type="button"
+    class="next"
+    (click)="event.emit('next')"
+    [innerHtml]="next"
+    [disabled]="!state.hasNext ? 'disabled' : null"
+    [style.background]="config.bgColor"
+  > 
+  </button>
+</span>

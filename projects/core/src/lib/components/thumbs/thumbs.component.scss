@@ -1,0 +1,22 @@
+:host {
+    display: block;
+}
+.container {
+    overflow: hidden;
+    position: relative;
+}
+.thumbnails {
+    display: flex;
+    transform: translate3d(0,0,0);
+    transition-property: transform;
+
+    & .swipe-item { 
+        background-position: center center;
+        background-size: cover;
+        transition: opacity 0.3s ease;
+       opacity: 0.4;
+       &.active {
+           opacity: 1;
+       } 
+    }
+}

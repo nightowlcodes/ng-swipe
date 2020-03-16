@@ -1,0 +1,19 @@
+.pagination {
+    position: absolute;
+    bottom: 15px;
+    text-align: center;
+    width: 100%;
+    & button {
+        border-radius: 50%;
+        border: none;
+        height: 16px;
+        width: 16px;
+        text-align: center;
+        margin-right: 8px;
+        display: inline-block;
+        cursor: pointer;
+        &:focus, &:active {
+            outline: 0;
+        }
+    }
+}

@@ -1,0 +1,9 @@
+<div class="pagination">
+  <button
+    type="button"
+    *ngFor="let bullet of state.items; let i = index"
+    [ngClass]="{'active': state.activeIndex === i}"
+    (click)="event.emit(i)"
+    [ngStyle]="{background: state.activeIndex === i ? config.accentColor : config.bgColor}"
+  ></button>
+</div>

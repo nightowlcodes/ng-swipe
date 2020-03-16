@@ -1,0 +1,17 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "ngSwipe",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "ng-swipe",
+      "kebab-case"
+    ]
+  }
+}

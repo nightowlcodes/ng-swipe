@@ -1,0 +1,115 @@
+<div *ngIf="type === 'minimal'; else full">
+    <div
+      class="swipe-slider-container"
+      [style.height.px]="config.sliderHeight"
+      (panend)="panEnd($event)"
+      (mouseenter)="mouseEnter()"
+      (mouseleave)="mouseLeave()"
+    >
+      <div
+        *ngIf="config.effect === 'swipe'"
+        class="swipe-slider"
+        [state]="state"
+        [width]="itemWidth"
+        [class.resize]="resize === true"
+        ng-swiper
+      >
+        <div
+          class="swipe-item"
+          *ngFor="let img of state.items; let i = index"
+          [style.backgroundImage]="'url(' + img.source + ')'"
+          [class.active]="state.activeIndex === i"
+          [style.minWidth.px]="itemWidth"
+        ></div>
+      </div>
+  
+      <div *ngIf="config.effect === 'fade'" class="swipe-slider fade">
+        <div
+          class="swipe-item"
+          *ngFor="let img of state.items; let i = index"
+          [style.backgroundImage]="'url(' + img.source + ')'"
+          [class.active]="state.activeIndex === i"
+          [style.minWidth.px]="itemWidth"
+          [style.transform]="
+            state.direction !== 'ltr'
+              ? 'translateX(' + i * itemWidth + 'px)'
+              : 'translateX(-' + i * itemWidth + 'px)'
+          "
+        ></div>
+      </div>
+  
+      <ng-swipe-navigation
+        *ngIf="config.navigate"
+        [state]="state"
+        [config]="config"
+        (event)="event.emit($event)"
+      ></ng-swipe-navigation>
+    </div>
+  </div>
+  
+  <ng-template #full>
+    <div
+      class="swipe-slider-container"
+      [style.height.px]="config.sliderHeight"
+      (panend)="panEnd($event)"
+      (mouseenter)="mouseEnter()"
+      (mouseleave)="mouseLeave()"
+    >
+      <div
+        *ngIf="config.effect === 'swipe'"
+        class="swipe-slider"
+        [state]="state"
+        [width]="itemWidth"
+        [config]="config"
+        [class.resize]="resize === true"
+        ng-swiper
+      >
+        <div
+          class="swipe-item"
+          *ngFor="let img of state.items; let i = index"
+          [style.backgroundImage]="'url(' + img.source + ')'"
+          [class.active]="state.activeIndex === i"
+          [style.minWidth.px]="itemWidth"
+        ></div>
+      </div>
+  
+      <div *ngIf="config.effect === 'fade'" class="swipe-slider fade">
+        <div
+          class="swipe-item"
+          *ngFor="let img of state.items; let i = index"
+          [style.backgroundImage]="'url(' + img.source + ')'"
+          [class.active]="state.activeIndex === i"
+          [style.minWidth.px]="itemWidth"
+          [style.transform]="
+            state.direction !== 'ltr'
+              ? 'translateX(' + i * itemWidth + 'px)'
+              : 'translateX(-' + i * itemWidth + 'px)'
+          "
+        ></div>
+      </div>
+  
+      <ng-swipe-navigation
+        *ngIf="config.navigate"
+        [state]="state"
+        [config]="config"
+        (event)="event.emit($event)"
+      ></ng-swipe-navigation>
+  
+      <ng-swipe-pagination
+        *ngIf="config.paginate && type === 'full'"
+        [state]="state"
+        [config]="config"
+        (event)="event.emit($event)"
+      ></ng-swipe-pagination>
+    </div>
+  
+    <ng-swipe-thumbs
+      *ngIf="config.thumbs && type === 'full'"
+      [state]="state"
+      [config]="config"
+      [width]="width"
+      (event)="event.emit($event)"
+      [style.background]="config.bgColor"
+    ></ng-swipe-thumbs>
+  </ng-template>
+  
