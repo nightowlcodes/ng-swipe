@@ -1,6 +1,6 @@
-# NgSwipe
+# @ng-swipe/core
 
-Angular Library for galleries.
+Angular Library for galleries in beta.
 
 ## Install
 
