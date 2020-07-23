@@ -12,20 +12,15 @@ export const configService = new InjectionToken<object>("slider_Config");
 
 export class SwipeService {
   readonly _instances = new Map<string, SwipeStore>();
-  config: any;
+  readonly config: SliderConfig;
   
-  constructor( @Optional() @Inject(configService) config: SliderConfig ) {
-    this.config = config ?  {...defaultConfig, ...config} : defaultConfig;
+  constructor( @Optional() @Inject(configService) moduleConfig: SliderConfig ) {
+    this.config = moduleConfig ?  {...defaultConfig, ...moduleConfig} : defaultConfig;
 
   }
 
-  ref(id = 'root', config?: any, defConfig?: any) {
-    if (!defConfig) {
+  ref(id = 'root', config?: any) {
       return this._instances.set(id, new SwipeStore({...this.config, ...config}, this.deleteInstance(id))).get(id);
-    } else {
-      return this._instances.set(id, new SwipeStore({...defConfig, ...config}, this.deleteInstance(id))).get(id);
-    }
-     
   }
 
   private deleteInstance(id: string) {

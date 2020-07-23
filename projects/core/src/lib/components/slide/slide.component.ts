@@ -15,7 +15,7 @@ import { SwipeState } from "../../models/slider.model";
   selector: "ng-swipe-slide",
   templateUrl: "./slide.component.html",
   styleUrls: ["./slide.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class SlideComponent implements OnInit, OnChanges {
   itemWidth;
@@ -28,6 +28,7 @@ export class SlideComponent implements OnInit, OnChanges {
   @Input() busy: boolean;
   @Input() type: "full" | "minimal";
   auto: any;
+
   @Output() event = new EventEmitter<string | number>();
 
   // Deactivate autoPlay on Pan
@@ -114,21 +115,28 @@ export class SlideComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+
     this.config.lightboxSlider && this.type === "full"
       ? (this.config = this.config.lightboxSlider)
       : this.config;
+      
+   const itemsCount = this.config.itemsPerView === undefined ? 1 : this.config.itemsPerView;  
     this.itemWidth = this.width / this.config.itemsPerView;
     if (this.config.autoPlay !== undefined) {
       this.autoPlay();
     }
+
+ 
+    
+    
   }
 
   private autoPlay() {
-    this.state.activeIndex < this.state.items.length - 1
-      ? (this.auto = setInterval(() => {
-          this.next();
-        }, this.config.autoPlay.delay))
-      : null;
+    // this.state.activeIndex < this.state.items.length - 1
+    //   ? (this.auto = setInterval(() => {
+    //       this.next();
+    //     }, this.config.autoPlay.delay))
+    //   : null;
   }
 
   ngOnChanges(changes: SimpleChanges) {

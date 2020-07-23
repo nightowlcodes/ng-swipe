@@ -24,7 +24,7 @@ import { SwipeService, configService } from "./services/swipe.service";
     SwipeDirective
   ],
   imports: [CommonModule, HammerModule, LayoutModule, BidiModule],
-  exports: [CoreComponent]
+  exports: [CoreComponent, SlideComponent]
 })
 export class CoreModule {
   public static forRoot(config: SliderConfig): ModuleWithProviders<SliderConfig> {

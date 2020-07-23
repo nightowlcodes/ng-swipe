@@ -1,0 +1,24 @@
+.wrap {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+  & img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.meta {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  & svg { 
+    vertical-align: sub;  
+    fill:  white;
+}
+}

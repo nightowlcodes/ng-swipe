@@ -8,6 +8,6 @@ export * from './lib/utils/swipe.default';
 
 export * from './lib/models/config.model';
 export * from './lib/models/slider.model';
-export * from './lib/core.module';
+export * from './lib/components/slide/slide.component';
 export * from './lib/core.component';
 export * from './lib/core.module';

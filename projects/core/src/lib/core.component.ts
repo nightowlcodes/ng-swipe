@@ -11,6 +11,7 @@ import {
 } from "@angular/core";
 
 import { SwipeService } from "./services/swipe.service";
+import { SwipeStore } from "./services/swipe.store";
 import { BreakpointsService } from "./services/breakpoints.service";
 import { SliderConfig } from "./models/config.model";
 import { defaultConfig } from "./utils/swipe.default";
@@ -20,8 +21,8 @@ import { Directionality } from "@angular/cdk/bidi";
   selector: "ng-swipe-core",
   template: `
     <ng-swipe-slide
-      [state]="swipeStore.state | async"
-      [config]="swipeStore.config | async"
+      [state]="store.state | async"
+      [config]="store.config | async"
       (event)="onEvent($event)"
       [width]="width"
       [resize]="resize"
@@ -43,13 +44,14 @@ export class CoreComponent implements OnInit, OnDestroy {
   @Output() lightboxEvent = new EventEmitter<string | number>();
   width: number;
   resize: boolean = false;
-  swipeStore: any;
+store: SwipeStore;
 
   constructor(
     private _swipe: SwipeService,
     private el: ElementRef,
     private biDir: Directionality,
-    private responsive: BreakpointsService
+    private responsive: BreakpointsService,
+    
   ) {}
 
   ngOnInit() {
@@ -57,33 +59,34 @@ export class CoreComponent implements OnInit, OnDestroy {
 
     this.width = this.el.nativeElement.offsetWidth;
 
-    // get Slider ref
-    this.swipeStore = this._swipe.ref(this.id, this.config);
+    // get Slider reference
+    this.store = this._swipe.ref(this.id, this.config);
 
-    this.swipeStore.setConfig(this.config);
+    // set configuration
+    this.store.setConfig(this.config)
 
     // set Items
-    this.swipeStore.loadItems(this.images);
+    this.store.loadItems(this.images);
 
     // set Layout Direction
     this.dir
-      ? this.swipeStore.layoutDir(this.dir)
-      : this.swipeStore.layoutDir(this.biDir.value);
+      ? this.store.layoutDir(this.dir)
+      : this.store.layoutDir(this.biDir.value);
 
-    this.swipeStore.setActive();
 
     // Check If Breakpoints options
     this.config.breakpoints !== undefined
-      ? this.responsive.responsiveConfig(
+      ?( this.responsive.responsiveConfig(
           this.config,
-          defaultConfig,
-          this.swipeStore
-        )
+          this.store
+        ))
       : null;
+
 
     this.activeItem
       ? this.onEvent(this.activeItem)
       : this.onEvent(this.config.initialItem);
+      
   }
 
   onResize($event): void {
@@ -94,16 +97,18 @@ export class CoreComponent implements OnInit, OnDestroy {
   onEvent(i: string | number) {
     this.resize = false;
     if (i === "next") {
-      this.swipeStore.next();
+      this.store.next();
     } else if (i === "prev") {
-      this.swipeStore.prev();
+      this.store.prev();
     } else {
-      this.swipeStore.setActive(<number>i);
+      this.store.setActive(<number>i);
     }
     this.lightboxEvent.emit(i)
+
+    
   }
 
   ngOnDestroy() {
-    this.swipeStore.destroy();
+    this.store.destroy();
   }
 }

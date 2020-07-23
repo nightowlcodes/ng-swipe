@@ -3,12 +3,14 @@ import { SwipeState } from "../models/slider.model";
 import { defaultState } from "../utils/swipe.default";
 import { BehaviorSubject, Observable } from "rxjs";
 
+
+
 export class SwipeStore {
   private _state: BehaviorSubject<SwipeState>;
   private _config: BehaviorSubject<object>;
   readonly state: Observable<SwipeState>;
   readonly config: Observable<object>;
-  constructor( config : object, private  deleteInstance : Function) {
+  constructor(config: object, private deleteInstance: Function) {
     this._state = new BehaviorSubject(defaultState);
     this.state = this._state.asObservable();
     this._config = new BehaviorSubject(config);
@@ -51,6 +53,6 @@ export class SwipeStore {
   destroy() {
     this._state.complete();
     this._config.complete();
-    this.deleteInstance()
+    this.deleteInstance();
   }
 }

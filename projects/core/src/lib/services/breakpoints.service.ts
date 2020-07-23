@@ -11,7 +11,8 @@ import {
 export class BreakpointsService {
   constructor(private breakpointObserve: BreakpointObserver) {}
 
-  responsiveConfig(config, def, store): void {
+    responsiveConfig(config, store, def?): void {
+  
     let userBreakpoints = [];
     for (let i in config.breakpoints) {
       userBreakpoints.push(Breakpoints[i]);
@@ -21,18 +22,25 @@ export class BreakpointsService {
       .subscribe((res: BreakpointState) => {
         // breakpointObserve return false between 600px and 650px on Resize
         if (res.matches) {
+          let options = config;
           const matchedValue = Object.keys(res.breakpoints).find(
             e => res.breakpoints[e] === true
           );
-          const breakPoint = Object.keys(Breakpoints).find(
+          const matchedBreakpoint = Object.keys(Breakpoints).find(
             e => Breakpoints[e] === matchedValue
           );
-          store.setConfig(
-            { ...config, ...config.breakpoints[breakPoint] },
-            def
-          );
+          const breakpoint = config.breakpoints[matchedBreakpoint];
+        for (const property in breakpoint) {
+            if ( typeof breakpoint[property] === 'object' ) {
+              options[property] = {...options[property], ...breakpoint[property]}
+              store.setConfig({...config, ...options})
+            } else {
+              store.setConfig({...config, ...breakpoint})
+            } 
+        }
+     
         } else {
-          store.setConfig(config, def);
+          store.setConfig(config);      
         }
       });
   }

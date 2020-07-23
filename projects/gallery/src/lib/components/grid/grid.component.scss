@@ -1,0 +1,10 @@
+.grid {
+    display: flex;
+    flex-flow: wrap;
+}
+.item {
+  display: flex;
+  & img {
+    max-width: 100%;
+  }
+}
