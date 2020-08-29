@@ -38,14 +38,11 @@ export class BreakpointsService {
               options[e] = {...config[e], ...breakpoint[e]};
             });
             // Send config
-            console.log("sMatch", options);
-            store.setConfig({ ...options }, def);
+            store.setConfig({ ...options, ...breakpoint }, def);
           } else {
             store.setConfig({ ...config, ...breakpoint }, def);
           }
         } else {
-          console.log("unmatched", config);
-
           store.setConfig(config, def);
         }
       });

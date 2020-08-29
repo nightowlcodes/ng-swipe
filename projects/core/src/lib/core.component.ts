@@ -63,7 +63,7 @@ store: SwipeStore;
     // get Slider reference
     this.store = this._swipe.ref(this.id, this.config);
 
-    // this.store.setConfig(this.config, defaultConfig);
+    this.store.setConfig(this.config, defaultConfig);
     // set Items
     this.store.loadItems(this.images);
 

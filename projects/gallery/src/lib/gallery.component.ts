@@ -16,10 +16,8 @@ import { defaultGallery } from './utils/gallery.config';
   template: `
   <ng-container  *ngIf="type === 'grid'">
   <ng-swipe-grid
-     
   [state]="galleryStore.state | async"
   [config]="galleryStore.config | async"
-  [store]="galleryStore"
   (event)="onEvent($event)"
 >
 </ng-swipe-grid>
@@ -38,7 +36,6 @@ import { defaultGallery } from './utils/gallery.config';
   <ng-swipe-featured-img
   [state]="galleryStore.state | async"
   [config]="galleryStore.config | async"
-  [store]="galleryStore"
   (event)="onEvent($event)">
 </ng-swipe-featured-img> 
 </ng-container>
@@ -81,9 +78,9 @@ export class GalleryComponent implements OnInit {
       this.type = this.config.type;
  
     // Check If Breakpoints options
-    this.config.breakpoints !== undefined
-    ? (this.responsive.responsiveConfig(this.config, this.galleryStore, defaultConfig))
-    : null;
+    // this.config.breakpoints !== undefined
+    // ? (this.responsive.responsiveConfig(this.config, this.galleryStore, defaultConfig))
+    // : null;
      
     
   }

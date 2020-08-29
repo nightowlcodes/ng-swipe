@@ -62,4 +62,5 @@ export interface galleryConfig {
     itemSpaceY?: number;
     bgColor?: string;
     accentColor?: string;
+    breakpoints?: BreakPoints
   }
