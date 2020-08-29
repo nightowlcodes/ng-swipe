@@ -38,10 +38,13 @@ const config : SliderConfig = {
       delay: 2000,
       stopOnHover: true
   
+    },
+    breakpoints: {
+      XSmall: {thumbsPerView: 3}
     }
   },
   breakpoints: {
-    XSmall: {itemsPerRow: 6, lightboxSlider: { thumbsPerView: 3}}
+    XSmall: {itemsPerRow: 6}
   }
 };
 

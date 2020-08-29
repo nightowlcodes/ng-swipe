@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 import { ModalService } from "../../../services/modal.service";
 
-import { Observable} from "rxjs";
+import { Observable, Subscription} from "rxjs";
 import { LightboxService } from '../../../services/lightbox.service';
 
 @Component({
@@ -25,8 +25,10 @@ export class LightboxComponent implements OnInit {
   store     ;
   active: number;
   config;
+  items;
   state;
   @ViewChild("wrap", { static: true }) wrapper: ElementRef;
+  subscription: Subscription;
 
   constructor(
     public modal: ModalService,
@@ -53,20 +55,22 @@ export class LightboxComponent implements OnInit {
 
   ngOnInit() {
     this.width = this.wrapper.nativeElement.offsetWidth;
-    this.store = this.lightboxService.store;
   
-    this.lightboxService.store.state.subscribe((e) => {
-      this.state = e
+    this.subscription = this.lightboxService.config.subscribe((e) => {
+      this.config = e
+      console.log('lbb', e);
+      
       
     });
 
-    this.lightboxService.store.config.subscribe((e) => {
-      this.config = e
+    this.subscription.add(this.lightboxService.items.subscribe((e) => {
+      this.items = e;
+      console.log('lbb', e);
       
-    });
-    this.store.state.subscribe((e) => {
-      this.active = e.activeIndex;
-    })
+    }));
+    // this.store.state.subscribe((e) => {
+    //   this.active = e.activeIndex;
+    // })
   }
 
   onResize($event): void {
@@ -75,6 +79,6 @@ export class LightboxComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    
+    this.subscription.unsubscribe()
   }
 }

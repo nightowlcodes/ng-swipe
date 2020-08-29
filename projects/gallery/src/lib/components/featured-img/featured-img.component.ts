@@ -1,6 +1,5 @@
-import { Component, Input, Output, OnInit, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
+import { Component, Input, Output, EventEmitter} from "@angular/core";
 import { ModalService } from '../../services/modal.service';
-import { LightboxStore } from '../../services/lightbox.store';
 import { LightboxService } from '../../services/lightbox.service';
 
 
@@ -10,26 +9,17 @@ import { LightboxService } from '../../services/lightbox.service';
   styleUrls: ['./featured-img.component.scss'],
 
 })
-export class FeaturedImgComponent implements OnInit {
+export class FeaturedImgComponent {
 
   @Input() state;
   @Input() config;
-  @Input() store : LightboxStore;
   @Output() event = new EventEmitter<number>();
 
   constructor(private modal: ModalService, private lightboxService: LightboxService ) {}
-  ngOnInit() {
-    
-  
-  }
-
   onClick(i) {
-    this.lightboxService.getStore(this.store);  
+    this.lightboxService.setConfig(this.config);
+    this.lightboxService.setItems(this.state.items);
     this.event.emit(i);
     this.modal.open(); 
-}
-
-ngOnDestroy() {
-}
-
+  }
 }

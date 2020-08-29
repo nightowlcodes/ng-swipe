@@ -76,17 +76,18 @@ export class AppComponent {
         delay: 2000,
         stopOnHover: true
     
-      }
-    },
-    breakpoints: {
+      },
+      breakpoints: {
 
-      Small: {
-        lightboxSlider: {
-          thumbsPerView: 2,
-          
+        Small: {
+     
+            thumbsPerView: 2,
+            
+        
         }
       }
-    }
+    },
+    
   
   };
   Conf: any = {

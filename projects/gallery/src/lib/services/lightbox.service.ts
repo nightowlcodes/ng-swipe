@@ -8,21 +8,30 @@ import { SwipeStore } from 'core';
 
 export class LightboxService {
 
-    store : SwipeStore;
+    _config : BehaviorSubject<any>;
+    _items : BehaviorSubject<any>;
+    config: Observable<any>;
+    items: Observable<any>;
+    constructor() {
+       this._config = new BehaviorSubject({}); 
+      this.config =  this._config.asObservable();
+      this._items = new BehaviorSubject([]);
+      this.items = this._items.asObservable();
+    }
 
-    // setConfig(e) {
-    //     this._config.next(e);
-    // }
+    setConfig(e) {
+        this._config.next(e);
+    }
 
     // setActive(e) {
     //     this.activeIndex = e;
     // }
 
-    // setItems(e) {
-    //     this.items = e;
-    // }
-
-    getStore(e) {
-        this.store = e; 
+    setItems(e) {
+        this._items.next(e);
     }
+
+    // getStore(e) {
+    //     this.store = e; 
+    // }
 }
