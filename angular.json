@@ -10,7 +10,7 @@
       "prefix": "ng-swipe",
       "schematics": {                          
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "architect": {
@@ -55,7 +55,7 @@
       "prefix": "ng-swipe",
       "schematics": {                          
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "architect": {
@@ -112,6 +112,9 @@
             "main": "projects/demo/src/main.ts",
             "polyfills": "projects/demo/src/polyfills.ts",
             "tsConfig": "projects/demo/tsconfig.app.json",
+            "allowedCommonJsDependencies": [
+              "hammerjs"
+            ],
         
             "assets": [
               "projects/demo/src/favicon.ico",

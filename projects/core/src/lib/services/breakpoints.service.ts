@@ -2,17 +2,19 @@ import { Injectable } from "@angular/core";
 import {
   BreakpointObserver,
   Breakpoints,
-  BreakpointState
+  BreakpointState,
 } from "@angular/cdk/layout";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class BreakpointsService {
   constructor(private breakpointObserve: BreakpointObserver) {}
 
-  responsiveConfig(config, def, store): void {
+  responsiveConfig(config, store, def?): void {
     let userBreakpoints = [];
+    // const options = config;
+    let ss = config;
     for (let i in config.breakpoints) {
       userBreakpoints.push(Breakpoints[i]);
     }
@@ -22,16 +24,28 @@ export class BreakpointsService {
         // breakpointObserve return false between 600px and 650px on Resize
         if (res.matches) {
           const matchedValue = Object.keys(res.breakpoints).find(
-            e => res.breakpoints[e] === true
+            (e) => res.breakpoints[e] === true
           );
-          const breakPoint = Object.keys(Breakpoints).find(
-            e => Breakpoints[e] === matchedValue
+          const matchedBreakpoint = Object.keys(Breakpoints).find(
+            (e) => Breakpoints[e] === matchedValue
           );
-          store.setConfig(
-            { ...config, ...config.breakpoints[breakPoint] },
-            def
-          );
+
+          const breakpoint = config.breakpoints[matchedBreakpoint];
+          // check if break
+          if ( Object.keys(breakpoint).some((el) => el === "lightboxSlider")) {
+            let options = Object.assign({}, config);
+            Object.keys(breakpoint).forEach((e) => {
+              options[e] = {...config[e], ...breakpoint[e]};
+            });
+            // Send config
+            console.log("sMatch", options);
+            store.setConfig({ ...options }, def);
+          } else {
+            store.setConfig({ ...config, ...breakpoint }, def);
+          }
         } else {
+          console.log("unmatched", config);
+
           store.setConfig(config, def);
         }
       });

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import {SliderConfig} from 'core'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -36,14 +36,83 @@ export class AppComponent {
     "../assets/imgs/image-7.jpg"
   ];
 
-  config: any = {
-    effect: "swipe",
+  config: SliderConfig = {
+    effect: "fade",
     sliderHeight: 400,
     initialItem: 0,
     navigate: true,
     paginate: true,
     thumbs: true,
     thumbsHeight: 60,
-    thumbsPerView: 2
+    thumbsPerView: 8,
+    breakpoints: {
+      Small: {
+        thumbsPerView: 4,
+        sliderHeight: 200,
+      }
+    }
+  };
+
+  cConf: any = {
+    type: "featuredImg",
+    initialItem: 2,
+    slideEffect: "swipe",
+
+    lightboxOptions: {
+      background: '#000',
+      showCount: true,
+      showTitle: true,
+    },
+    lightboxSlider: {
+      effect: "fade",
+      sliderHeight: 400,
+      accentColor: 'green',
+      itemsPerView: 1,
+      bgColor: 'purple',
+     
+
+
+      autoPlay: {
+        delay: 2000,
+        stopOnHover: true
+    
+      }
+    },
+    breakpoints: {
+
+      Small: {
+        lightboxSlider: {
+          thumbsPerView: 2,
+          
+        }
+      }
+    }
+  
+  };
+  Conf: any = {
+    type: "grid",
+    initialItem: 3,
+    slideEffect: "swipe",
+    thumbs: true,
+    itemsPerRow: 4,
+    lightboxOptions: {
+      background: '#ff5254',
+   
+    },
+    lightboxSlider: {
+      thumbsPerView: 7,
+      itemSpaceX: 6,
+      itemSpaceY: 6,
+      bgColor: "blue",
+      accentColor: 'white',
+      autoPlay: {
+        delay: 2000,
+        stopOnHover: true
+    
+      }
+    },
+    breakpoints: {
+      XSmall: {itemsPerRow: 6}
+    }
   };
 }

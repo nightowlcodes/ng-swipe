@@ -7,12 +7,24 @@
     <!-- <div style="width: 42%; margin-top: 20px; padding: 0 8px; display: inline-block;">
       <lib-gallery [images]="data" [config]="cConf" id="1" dir="ltr"></lib-gallery>
     </div> -->
+    <div class="container" style="display: inline-flex; width: 95%; margin: 0 auto; position: relative;">
+      <div style="width: 50%; margin-top: 20px; padding: 0 8px;">
+      <ng-swipe-core [images]="data"  dir="ltr" [config]="config"></ng-swipe-core>
+      </div>
+      <div style="width: 50%; margin-top: 20px; padding: 0 8px;">
+      <ng-swipe-core  [images]="data"  dir="ltr"></ng-swipe-core>
+      </div>
+    </div>
    
-   
-      <ng-swipe-core [images]="data" id="2" dir="ltr"></ng-swipe-core>
     
       <div class="container">
-        <ng-swipe-core [images]="data" [config]="config" id="1" dir="ltr"></ng-swipe-core>
+        <div style="width: 50%; margin-top: 20px; padding: 0 8px;">
+          <ng-swipe-gallery  [images]="data"  dir="ltr"></ng-swipe-gallery>
+          </div>
+
+          <div style="width: 50%; margin-top: 20px; padding: 0 8px;">
+            <ng-swipe-gallery   [images]="data"  dir="ltr" [config]="cConf"></ng-swipe-gallery>
+            </div>
       </div>
  
  

@@ -1,0 +1,40 @@
+:host {
+    display: block;
+    width: 100%;
+}
+.slider {
+    position: relative;
+    & .title {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: white;
+        font-size: 0.8rem;
+        padding: 4px;
+        font-weight: 600;
+    }
+    & .meta {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        color: white;
+        font-size: 0.8rem;
+        padding: 4px;
+        font-weight: 600;
+        & svg {
+            fill: white;
+            vertical-align: sub;
+        }
+      }
+}
+.thumbs {
+    display: inline-flex;
+    width: 100%;
+    flex-flow: wrap;
+    > div {
+        display: inline-block;
+        background-position: center center;
+        background-size: cover;
+        height: 60px;
+    }
+}
