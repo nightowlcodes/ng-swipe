@@ -47,7 +47,8 @@ export class AppComponent {
     thumbsPerView: 8,
     breakpoints: {
       Small: {
-        thumbsPerView: 4
+        thumbsPerView: 4,
+        sliderHeight: 200,
       }
     }
   };
@@ -56,16 +57,21 @@ export class AppComponent {
     type: "featuredImg",
     initialItem: 2,
     slideEffect: "swipe",
+
     lightboxOptions: {
       background: '#000',
       showCount: true,
       showTitle: true,
     },
     lightboxSlider: {
-      itemSpaceX: 6,
-      itemSpaceY: 6,
-      bgColor: "purple",
-      accentColor: 'white',
+      effect: "fade",
+      sliderHeight: 400,
+      accentColor: 'green',
+      itemsPerView: 1,
+      bgColor: 'purple',
+     
+
+
       autoPlay: {
         delay: 2000,
         stopOnHover: true
@@ -73,9 +79,11 @@ export class AppComponent {
       }
     },
     breakpoints: {
+
       Small: {
         lightboxSlider: {
           thumbsPerView: 2,
+          
         }
       }
     }

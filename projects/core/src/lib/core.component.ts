@@ -55,6 +55,7 @@ store: SwipeStore;
   ) {}
 
   ngOnInit() {
+    
     this.config ? this.config : (this.config = this._swipe.config);
 
     this.width = this.el.nativeElement.offsetWidth;
@@ -62,9 +63,7 @@ store: SwipeStore;
     // get Slider reference
     this.store = this._swipe.ref(this.id, this.config);
 
-    // set configuration
-    this.store.setConfig(this.config)
-
+    // this.store.setConfig(this.config, defaultConfig);
     // set Items
     this.store.loadItems(this.images);
 
@@ -78,7 +77,8 @@ store: SwipeStore;
     this.config.breakpoints !== undefined
       ?( this.responsive.responsiveConfig(
           this.config,
-          this.store
+          this.store,
+          defaultConfig
         ))
       : null;
 

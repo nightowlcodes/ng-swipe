@@ -1,0 +1,57 @@
+<!-- <div
+  class="bg"
+  [style.background]="(store.config | async)?.lightboxOptions.background"
+></div> -->
+<div class="modal-wrap" (window:resize)="onResize($event)" #wrap>
+  <div class="modal-head">
+    <!-- <button
+      class="closeBtn"
+      (tap)="onTap()"
+      *ngIf="(store.config | async)?.lightboxOptions.closeBtn"
+      [style.background]="(store.config | async)?.lightboxSlider.bgColor"
+    >
+      <svg
+        [style.fill]="(store.config | async)?.lightboxSlider.accentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        />
+        <path d="M0 0h24v24H0z" fill="none" />
+      </svg>
+    </button> -->
+    <!-- <span
+      class="title"
+      *ngIf="(store.config | async)?.lightboxOptions.showTitle"
+      [style.color]="(store.config | async)?.lightboxOptions.textColor"
+    >
+      {{ (store.state | async)?.items[active]["title"] }}
+    </span> -->
+  </div>
+  <div class="modal-content">
+    <!-- Should be ng-core -->
+    <ng-swipe-slide
+      [state]="state"
+      [config]="config"
+      [width]="width"
+      (event)="onEvent($event)"
+      [resize]="resize"
+      type="full"
+      [busy]="busy | async"
+    >
+    </ng-swipe-slide>
+  </div>
+  <div class="modal-footer">
+    <!-- <span
+      class="count"
+      *ngIf="(store.config | async)?.lightboxOptions.showCount"
+      [style.color]="(store.config | async)?.lightboxOptions.textColor"
+    >
+      <span>{{ (store.state | async)?.activeIndex + 1 }}</span> /
+      {{ (store.state | async)?.items.length }}
+    </span> -->
+  </div>
+</div>

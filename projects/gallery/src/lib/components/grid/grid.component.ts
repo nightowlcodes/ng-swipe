@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ModalService } from '../../services/modal.service';
 import { LightboxService } from '../../services/lightbox.service';
-import { config } from 'rxjs';
+import { LightboxStore } from '../../services/lightbox.store';
+
 @Component({
   selector: 'ng-swipe-grid',
   templateUrl: './grid.component.html',
@@ -9,20 +11,19 @@ import { config } from 'rxjs';
 export class GridComponent implements OnInit {
   @Input() state;
   @Input() config;
+  @Input() store : LightboxStore;
   @Output() event = new EventEmitter<string | number>();
-  constructor( private lightbox: LightboxService) { }
+  constructor( private modal: ModalService, private lightboxService: LightboxService) { }
 
-  ngOnInit(): void {
-    console.log('G.Comp,', this.config);
-    console.log('G State,', this.state);
+  ngOnInit() {
+  
   }
+
   onClick(i) {
-    this.lightbox.loadItems(this.state.items);
-    this.lightbox.setConfig(this.config)
+    this.lightboxService.getStore(this.store);
+    console.log('ssfC', this.config);
     this.event.emit(i);
-
-    this.lightbox.open();
-    this.lightbox.setActive(i);
-  }
+    this.modal.open(); 
+}
 
 }

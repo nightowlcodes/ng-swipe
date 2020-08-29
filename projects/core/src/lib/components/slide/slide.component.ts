@@ -124,9 +124,12 @@ export class SlideComponent implements OnInit, OnChanges {
     this.itemWidth = this.width / this.config.itemsPerView;
     if (this.config.autoPlay !== undefined) {
       this.autoPlay();
+      
     }
 
- 
+   
+    
+
     
     
   }
@@ -140,6 +143,7 @@ export class SlideComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+
     this.resize
       ? (this.itemWidth = this.width / this.config.itemsPerView)
       : null;

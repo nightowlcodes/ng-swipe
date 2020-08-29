@@ -14,6 +14,37 @@ const config : SliderConfig = {
    thumbsPerView: 8,
  }
 
+ const Conf: any = {
+  type: "grid",
+  initialItem: 3,
+  slideEffect: "swipe",
+  thumbs: true,
+  itemsPerRow: 4,
+  lightboxOptions: {
+    background: '#ff5254',
+ 
+  },
+  lightboxSlider: {
+    effect: "fade",
+    sliderHeight: 400,
+
+    itemsPerView: 1,
+    thumbsPerView: 7,
+    itemSpaceX: 6,
+    itemSpaceY: 6,
+    bgColor: "blue",
+    accentColor: 'white',
+    autoPlay: {
+      delay: 2000,
+      stopOnHover: true
+  
+    }
+  },
+  breakpoints: {
+    XSmall: {itemsPerRow: 6, lightboxSlider: { thumbsPerView: 3}}
+  }
+};
+
 @NgModule({
   declarations: [
     AppComponent
@@ -21,7 +52,7 @@ const config : SliderConfig = {
   imports: [
     BrowserModule,
     CoreModule.forRoot(config),
-    GalleryModule
+    GalleryModule.forRoot(Conf)
   ],
   providers: [],
   bootstrap: [AppComponent]

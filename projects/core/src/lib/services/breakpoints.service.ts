@@ -2,18 +2,19 @@ import { Injectable } from "@angular/core";
 import {
   BreakpointObserver,
   Breakpoints,
-  BreakpointState
+  BreakpointState,
 } from "@angular/cdk/layout";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class BreakpointsService {
   constructor(private breakpointObserve: BreakpointObserver) {}
 
-    responsiveConfig(config, store, def?): void {
-  
+  responsiveConfig(config, store, def?): void {
     let userBreakpoints = [];
+    // const options = config;
+    let ss = config;
     for (let i in config.breakpoints) {
       userBreakpoints.push(Breakpoints[i]);
     }
@@ -22,25 +23,30 @@ export class BreakpointsService {
       .subscribe((res: BreakpointState) => {
         // breakpointObserve return false between 600px and 650px on Resize
         if (res.matches) {
-          let options = config;
           const matchedValue = Object.keys(res.breakpoints).find(
-            e => res.breakpoints[e] === true
+            (e) => res.breakpoints[e] === true
           );
           const matchedBreakpoint = Object.keys(Breakpoints).find(
-            e => Breakpoints[e] === matchedValue
+            (e) => Breakpoints[e] === matchedValue
           );
+
           const breakpoint = config.breakpoints[matchedBreakpoint];
-        for (const property in breakpoint) {
-            if ( typeof breakpoint[property] === 'object' ) {
-              options[property] = {...options[property], ...breakpoint[property]}
-              store.setConfig({...config, ...options})
-            } else {
-              store.setConfig({...config, ...breakpoint})
-            } 
-        }
-     
+          // check if break
+          if ( Object.keys(breakpoint).some((el) => el === "lightboxSlider")) {
+            let options = Object.assign({}, config);
+            Object.keys(breakpoint).forEach((e) => {
+              options[e] = {...config[e], ...breakpoint[e]};
+            });
+            // Send config
+            console.log("sMatch", options);
+            store.setConfig({ ...options }, def);
+          } else {
+            store.setConfig({ ...config, ...breakpoint }, def);
+          }
         } else {
-          store.setConfig(config);      
+          console.log("unmatched", config);
+
+          store.setConfig(config, def);
         }
       });
   }

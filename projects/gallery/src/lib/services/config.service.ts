@@ -12,8 +12,8 @@ export class ConfigService {
   readonly _instances = new Map<string, SwipeStore>();
   config: galleryConfig;
   
-  constructor(@Optional() @Inject(gService) config: galleryConfig) {
-    this.config = config ? { ...this.config, ...config } : defaultGallery;
+  constructor(@Optional() @Inject(gService) moduleConfig: galleryConfig) {
+    this.config = moduleConfig ? { ...defaultGallery, ...moduleConfig } : defaultGallery;
   }
 
   ref(id = "root", config: galleryConfig) {

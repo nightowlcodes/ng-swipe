@@ -1,5 +1,4 @@
 import { SwipeState } from "../models/slider.model";
-
 import { defaultState } from "../utils/swipe.default";
 import { BehaviorSubject, Observable } from "rxjs";
 
@@ -29,8 +28,17 @@ export class SwipeStore {
     dir ? this.setState({ direction: dir }) : null;
   }
 
-  setConfig(data: any) {
-      this._config.next({...this._config.value, ...data });
+  setConfig(data: any, def: any) {
+    const ifGallery = Object.keys(data).some((prop) => prop === 'lightboxSlider');
+    // Check if nested objects found in data.
+    ifGallery ? (
+      data['lightboxSlider'] = { ...def['lightboxSlider'], ...data['lightboxSlider'] },
+      data['lightboxOptions'] = { ...def['lightboxOptions'], ...data['lightboxOptions'] },
+      // merge config with data
+      this._config.next({ ...this._config.value, ...data }),
+      console.log('matched applied', { ...this._config.value, ...data })
+    ) : this._config.next({ ...this._config.value, ...data });
+
   }
 
   // set current ActiveIndex to Component State
