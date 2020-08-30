@@ -5,7 +5,6 @@ import {
   EventEmitter,
   OnChanges,
   OnInit,
-  ChangeDetectionStrategy,
   SimpleChanges,
   HostListener,
 } from "@angular/core";
@@ -19,14 +18,14 @@ import { SwipeState } from "../../models/slider.model";
 })
 export class SlideComponent implements OnInit, OnChanges {
   itemWidth;
+
   // Config
   @Input() config;
-  //State
   @Input() state: SwipeState;
   @Input() width: number;
   @Input() resize: boolean;
   @Input() busy: boolean;
-  @Input() type: "full" | "minimal";
+  @Input() type: 'full' | 'minimal';
   auto: any;
 
   @Output() event = new EventEmitter<string | number>();

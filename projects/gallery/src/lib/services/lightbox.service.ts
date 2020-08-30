@@ -37,10 +37,4 @@ export class LightboxService {
     private setState(e) {
         this._state.next({...this._state.value, ...e});
     }
-
-
-
-    // getStore(e) {
-    //     this.store = e; 
-    // }
 }

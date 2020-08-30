@@ -54,10 +54,11 @@ export class AppComponent {
   };
 
   cConf: any = {
-    type: "featuredImg",
+    type: "slideGallery",
     initialItem: 2,
     slideEffect: "swipe",
-
+    slideHeight: 400,
+    showTitle: true,
     lightboxOptions: {
       background: '#000',
       showCount: true,
