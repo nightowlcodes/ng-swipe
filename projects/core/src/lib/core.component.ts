@@ -7,7 +7,8 @@ import {
   ChangeDetectionStrategy,
   Output,
   EventEmitter,
-  ViewEncapsulation
+  ViewEncapsulation,
+  SimpleChange,
 } from "@angular/core";
 
 import { SwipeService } from "./services/swipe.service";
@@ -26,14 +27,14 @@ import { Directionality } from "@angular/cdk/bidi";
       (event)="onEvent($event)"
       [width]="width"
       [resize]="resize"
-      type="full"
+      [type]="sliderType"
       (window:resize)="onResize($event)"
     >
     </ng-swipe-slide>
   `,
   styles: [":host {display: block}"],
 
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoreComponent implements OnInit, OnDestroy {
   @Input() images: [];
@@ -41,21 +42,20 @@ export class CoreComponent implements OnInit, OnDestroy {
   @Input() dir: string;
   @Input() config: SliderConfig;
   @Input() activeItem: number;
-  @Output() lightboxEvent = new EventEmitter<string | number>();
+  @Input() sliderType: string;
+  @Output() galleryEvent = new EventEmitter<string | number>();
   width: number;
   resize: boolean = false;
-store: SwipeStore;
+  store: SwipeStore;
 
   constructor(
     private _swipe: SwipeService,
     private el: ElementRef,
     private biDir: Directionality,
-    private responsive: BreakpointsService,
-    
+    private responsive: BreakpointsService
   ) {}
 
   ngOnInit() {
-    
     this.config ? this.config : (this.config = this._swipe.config);
 
     this.width = this.el.nativeElement.offsetWidth;
@@ -72,21 +72,16 @@ store: SwipeStore;
       ? this.store.layoutDir(this.dir)
       : this.store.layoutDir(this.biDir.value);
 
-
     // Check If Breakpoints options
     this.config.breakpoints !== undefined
-      ?( this.responsive.responsiveConfig(
-          this.config,
-          this.store,
-          defaultConfig
-        ))
+      ? this.responsive.responsiveConfig(this.config, this.store, defaultConfig)
       : null;
 
+    !this.sliderType ? (this.sliderType = "full") : null;
 
     this.activeItem
       ? this.onEvent(this.activeItem)
       : this.onEvent(this.config.initialItem);
-      
   }
 
   onResize($event): void {
@@ -103,9 +98,13 @@ store: SwipeStore;
     } else {
       this.store.setActive(<number>i);
     }
-    this.lightboxEvent.emit(i)
+    this.galleryEvent.emit(i);
+  }
 
-    
+  ngOnChanges(changes: { [activeItem: number]: SimpleChange }) {
+    if (changes["activeItem"] && this.activeItem >= 0 && this.store) {
+      this.store.setActive(this.activeItem);
+    }
   }
 
   ngOnDestroy() {

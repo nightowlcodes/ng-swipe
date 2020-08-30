@@ -50,13 +50,13 @@ export class SwipeStore {
     });
   }
 
-  prev() {
-    this.setActive(this._state.value.activeIndex - 1);
-  }
+    prev() {
+      this.setActive(this._state.value.activeIndex - 1);
+    }
 
-  next() {
-    this.setActive(this._state.value.activeIndex + 1);
-  }
+    next() {
+      this.setActive(this._state.value.activeIndex + 1);
+    }
 
   destroy() {
     this._state.complete();

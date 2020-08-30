@@ -2,7 +2,8 @@ import {
   Component,
   OnInit,
   Input,
-  ViewEncapsulation
+  ViewEncapsulation,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { Directionality } from "@angular/cdk/bidi";
 import { BreakpointsService, SwipeStore, defaultConfig } from "core";
@@ -26,11 +27,11 @@ import { defaultGallery } from './utils/gallery.config';
   <ng-swipe-slider
   [state]="galleryStore.state | async"
   [config]="galleryStore.config | async"
-  
   (event)="onEvent($event)"
 >
 </ng-swipe-slider>
 </ng-container>
+
 <ng-container  *ngIf="type === 'featuredImg'">
   <ng-swipe-featured-img
   [state]="galleryStore.state | async"
@@ -42,6 +43,7 @@ import { defaultGallery } from './utils/gallery.config';
   `,
   styleUrls: ['./gallery.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GalleryComponent implements OnInit {
 
@@ -50,7 +52,7 @@ export class GalleryComponent implements OnInit {
   @Input() dir: string;
   @Input() config: galleryConfig;
   galleryStore: SwipeStore;
-  type;
+  type : galleryConfig['type'];
   constructor(
     private biDir: Directionality,
     private _gallery: ConfigService,
@@ -67,12 +69,14 @@ export class GalleryComponent implements OnInit {
       // set Items
       this.galleryStore.loadItems(this.images);
 
+      this.galleryStore.setActive(this.config.initialItem)
+
       // set Layout Direction
       this.dir
         ? this.galleryStore.layoutDir(this.dir)
         : this.galleryStore.layoutDir(this.biDir.value);
 
-      // set config
+      // set gallery type
       this.type = this.config.type;
  
     // Check If Breakpoints options
