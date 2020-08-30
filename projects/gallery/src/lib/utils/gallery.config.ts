@@ -23,8 +23,8 @@ export const defaultGallery: galleryConfig = {
     closeBtn: true,
     background: "red",
     textColor: "white",
-    showCount: false,
-    showTitle: false,
+    showCount: true,
+    showTitle: true,
   },
   lightboxSlider: {
     effect: "fade",

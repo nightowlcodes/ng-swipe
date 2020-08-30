@@ -1,35 +1,44 @@
 import { Injectable, Inject} from "@angular/core";
 import {BehaviorSubject, Subject, Observable} from "rxjs";
 import { galleryConfig } from "../models/config.model";
-import { SwipeStore } from 'core';
+import { defaultGallery } from "../utils/gallery.config";
+import { defaultState, SwipeState } from 'core';
 @Injectable({
     providedIn: 'root'
 })
 
 export class LightboxService {
 
-    _config : BehaviorSubject<any>;
-    _items : BehaviorSubject<any>;
-    config: Observable<any>;
-    items: Observable<any>;
+    _config : BehaviorSubject<galleryConfig>;
+    _state : BehaviorSubject<SwipeState>;
+    config: Observable<galleryConfig>;
+    state: Observable<SwipeState>;
     constructor() {
-       this._config = new BehaviorSubject({}); 
+       this._config = new BehaviorSubject(defaultGallery); 
       this.config =  this._config.asObservable();
-      this._items = new BehaviorSubject([]);
-      this.items = this._items.asObservable();
+      this._state = new BehaviorSubject(defaultState);
+      this.state = this._state.asObservable();
     }
 
     setConfig(e) {
         this._config.next(e);
     }
 
-    // setActive(e) {
-    //     this.activeIndex = e;
-    // }
+
+    setActive(e) {
+        this.setState({activeIndex: e})
+    }
 
     setItems(e) {
-        this._items.next(e);
+        this.setState({items: e})
     }
+
+
+    private setState(e) {
+        this._state.next({...this._state.value, ...e});
+    }
+
+
 
     // getStore(e) {
     //     this.store = e; 

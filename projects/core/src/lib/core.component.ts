@@ -36,7 +36,7 @@ import { Directionality } from "@angular/cdk/bidi";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoreComponent implements OnInit, OnDestroy {
-  @Input() images: Array<string>;
+  @Input() images: [];
   @Input() id: string;
   @Input() dir: string;
   @Input() config: SliderConfig;

@@ -18,7 +18,6 @@ import { defaultGallery } from './utils/gallery.config';
   <ng-swipe-grid
   [state]="galleryStore.state | async"
   [config]="galleryStore.config | async"
-  (event)="onEvent($event)"
 >
 </ng-swipe-grid>
 </ng-container>
@@ -35,8 +34,7 @@ import { defaultGallery } from './utils/gallery.config';
 <ng-container  *ngIf="type === 'featuredImg'">
   <ng-swipe-featured-img
   [state]="galleryStore.state | async"
-  [config]="galleryStore.config | async"
-  (event)="onEvent($event)">
+  [config]="galleryStore.config | async">
 </ng-swipe-featured-img> 
 </ng-container>
 
@@ -47,7 +45,7 @@ import { defaultGallery } from './utils/gallery.config';
 })
 export class GalleryComponent implements OnInit {
 
-  @Input() images: Array<string>;
+  @Input() images: [];
   @Input() id: string;
   @Input() dir: string;
   @Input() config: galleryConfig;

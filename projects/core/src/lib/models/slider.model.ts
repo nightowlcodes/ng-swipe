@@ -4,6 +4,6 @@ export interface SwipeState {
   activeIndex?: number;
   hasPrev?: boolean;
   hasNext?: boolean;
-  items?: Array<string>;
+  items?: Array<{source?: string; title?:string}>;
 }
 

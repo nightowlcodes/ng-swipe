@@ -20,7 +20,7 @@ export class SwipeStore {
     this._state.next({ ...this._state.value, ...state });
   }
 
-  loadItems(items: string[]) {
+  loadItems(items: []) {
     items ? this.setState({ items: items }) : null;
   }
 
