@@ -3,7 +3,6 @@ import { Overlay, ScrollStrategyOptions } from "@angular/cdk/overlay";
 import { ComponentPortal } from "@angular/cdk/portal";
 import { BehaviorSubject, Observable } from "rxjs";
 import { ModalWrapComponent } from '../components/lightbox/modal-wrap.component';
-import {LightboxStore} from "./lightbox.store"
 import { defaultGallery } from '../utils/gallery.config';
 
 @Injectable()
@@ -12,7 +11,6 @@ export class ModalService {
   private _busy: BehaviorSubject<boolean>;
   readonly busy: Observable<boolean>;
   modalRef: any;
-  readonly _instances = new Map<string, LightboxStore>();
   constructor(
     
     private overlay?: Overlay,
@@ -23,9 +21,6 @@ export class ModalService {
     this.busy = this._busy.asObservable();
   }
 
-  ref(id, config) {
-    return this._instances.set(id, new LightboxStore()).get(id);
-  }
 
   // Open Method
   open(): void {

@@ -2,7 +2,7 @@
   class="bg"
   [style.background]="config.lightboxOptions.background"
 ></div>
-<div class="modal-wrap" (window:resize)="onResize($event)" #wrap>
+<div class="modal-wrap">
   <div class="modal-head">
     <button
       class="closeBtn"
@@ -23,26 +23,26 @@
         <path d="M0 0h24v24H0z" fill="none" />
       </svg>
     </button>
-     <!-- <span
+     <span
       class="title"
-      *ngIf="(store.config | async)?.lightboxOptions.showTitle"
-      [style.color]="(store.config | async)?.lightboxOptions.textColor"
+      *ngIf="config.lightboxOptions.showTitle"
+      [style.color]="config.lightboxOptions.textColor"
     >
-      {{ (store.state | async)?.items[active]["title"] }}
-    </span> -->
+      {{ state.items[state.activeIndex].title }} 
+    </span>
   </div>
   <div class="modal-content">
 
-    <ng-swipe-core [images]="items" [config]="config.lightboxSlider"></ng-swipe-core> 
+    <ng-swipe-core [images]="state.items" [activeItem]="state.activeIndex" [config]="config.lightboxSlider" (lightboxEvent)="onEvent($event)"></ng-swipe-core>
   </div>
   <div class="modal-footer">
-    <!-- <span
+    <span
       class="count"
-      *ngIf="(store.config | async)?.lightboxOptions.showCount"
-      [style.color]="(store.config | async)?.lightboxOptions.textColor"
+      *ngIf="config.lightboxOptions.showCount"
+      [style.color]="config.lightboxOptions.textColor"
     >
-      <span>{{ (store.state | async)?.activeIndex + 1 }}</span> /
-      {{ (store.state | async)?.items.length }}
-    </span> -->
+      <span>{{ state.activeIndex + 1 }}</span> /
+      {{state.items.length }}
+    </span>
   </div>
 </div>
