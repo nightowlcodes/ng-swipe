@@ -1,6 +1,10 @@
 <div class="grid">
-    <div  class="item" 
-    (tap)="onClick(i)" *ngFor="let img of state.items; let i = index" [style.width.%]="100 / config.itemsPerRow">
-        <img [src]="img.source">
-    </div>
+  <div
+    class="item"
+    (tap)="onClick(i)"
+    *ngFor="let img of state.items; let i = index"
+    [style.width.%]="100 / config.itemsPerRow"
+  >
+    <img [src]="img.source" />
+  </div>
 </div>

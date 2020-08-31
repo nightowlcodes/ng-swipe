@@ -14,7 +14,6 @@ import { SwipeState } from "../../models/slider.model";
   selector: "ng-swipe-slide",
   templateUrl: "./slide.component.html",
   styleUrls: ["./slide.component.scss"],
-
 })
 export class SlideComponent implements OnInit, OnChanges {
   itemWidth;
@@ -25,7 +24,7 @@ export class SlideComponent implements OnInit, OnChanges {
   @Input() width: number;
   @Input() resize: boolean;
   @Input() busy: boolean;
-  @Input() type: 'full' | 'minimal';
+  @Input() type: "full" | "minimal";
   auto: any;
 
   @Output() event = new EventEmitter<string | number>();
@@ -114,23 +113,16 @@ export class SlideComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-
     this.config.lightboxSlider && this.type === "full"
       ? (this.config = this.config.lightboxSlider)
       : this.config;
-      
-   const itemsCount = this.config.itemsPerView === undefined ? 1 : this.config.itemsPerView;  
+
+    const itemsCount =
+      this.config.itemsPerView === undefined ? 1 : this.config.itemsPerView;
     this.itemWidth = this.width / this.config.itemsPerView;
     if (this.config.autoPlay !== undefined) {
       this.autoPlay();
-      
     }
-
-   
-    
-
-    
-    
   }
 
   private autoPlay() {
@@ -142,7 +134,6 @@ export class SlideComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
     this.resize
       ? (this.itemWidth = this.width / this.config.itemsPerView)
       : null;

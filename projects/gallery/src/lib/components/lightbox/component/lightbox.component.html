@@ -1,7 +1,4 @@
-<div
-  class="bg"
-  [style.background]="config.lightboxOptions.background"
-></div>
+<div class="bg" [style.background]="config.lightboxOptions.background"></div>
 <div class="modal-wrap">
   <div class="modal-head">
     <button
@@ -23,17 +20,21 @@
         <path d="M0 0h24v24H0z" fill="none" />
       </svg>
     </button>
-     <span
+    <span
       class="title"
       *ngIf="config.lightboxOptions.showTitle"
       [style.color]="config.lightboxOptions.textColor"
     >
-      {{ state.items[state.activeIndex].title }} 
+      {{ state.items[state.activeIndex].title }}
     </span>
   </div>
   <div class="modal-content">
-
-    <ng-swipe-core [images]="state.items" [activeItem]="state.activeIndex" [config]="config.lightboxSlider" (lightboxEvent)="onEvent($event)"></ng-swipe-core>
+    <ng-swipe-core
+      [images]="state.items"
+      [activeItem]="state.activeIndex"
+      [config]="config.lightboxSlider"
+      (galleryEvent)="onEvent($event)"
+    ></ng-swipe-core>
   </div>
   <div class="modal-footer">
     <span
@@ -42,7 +43,7 @@
       [style.color]="config.lightboxOptions.textColor"
     >
       <span>{{ state.activeIndex + 1 }}</span> /
-      {{state.items.length }}
+      {{ state.items.length }}
     </span>
   </div>
 </div>
